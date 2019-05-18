@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container,ListGroupItem,Button} from 'reactstrap';
+import {Container,ListGroupItem,ListGroup,Button} from 'reactstrap';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 // import uuid from 'uuid' removing this. using it only for the state
 import {connect} from 'react-redux';
@@ -21,9 +21,7 @@ render(){
 	const {items}= this.props.item
 	return (
  <Container>
-
-
- {/* <ListGroup> */}
+ <ListGroup>
   <TransitionGroup className="shopping-list">
     {items.map(({_id,name}) => (
 	   <CSSTransition key ={_id} timeout={500} classNames= "fade">
@@ -31,15 +29,15 @@ render(){
 		<Button className="remove-btn"
 		color="danger"
 		size="sm"
-		onClick={this.onDeleteClick.bind(this,_id)}
-			>
+		onClick={this.onDeleteClick.bind(this,_id)}>
 			&times;
 		</Button>
-		{name} </ListGroupItem>
+		   {name}
+		</ListGroupItem>
 	 	</CSSTransition>
  	))}
 	     </TransitionGroup>
-	   {/* </ListGroup> */}
+	   </ListGroup>
  		</Container>
 	 		)
 	 	}
@@ -53,6 +51,5 @@ const mapStateToProps=(state) => ({
 
 	item:state.item
 })
-
 
 export default connect(mapStateToProps,{getItems, deleteItem})(ShoppingList);
